@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Treinos e Dieta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .header {
+            background-color: #111;
+            color: #00FF00;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid #00FF00;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 700;
+        }
+
+        .main-content {
+            padding: 40px;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #222;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight {
+            color: #00FF00;
+            font-weight: 700;
+        }
+
+        .product-description {
+            margin-bottom: 30px;
+            font-size: 1.25em;
+        }
+
+        .cta-button {
+            display: inline-block;
+            width: 220px;
+            padding: 15px;
+            text-align: center;
+            background-color: #00FF00;
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: #00CC00;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background-color: #111;
+            border-top: 2px solid #00FF00;
+        }
+
+        .whatsapp-icon {
+            width: 60px;
+            height: 60px;
+            background: url('https://cdn-icons-png.flaticon.com/512/733/733585.png') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
+        }
+
+        .timer {
+            font-size: 2em;
+            font-weight: 700;
+            color: #FF0000;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+            }
+
+            .cta-button {
+                width: 100%;
+                font-size: 1em;
+            }
+
+            .footer {
+                padding: 10px;
+            }
+
+            .product-image {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Transforme Seu Corpo e Sua Vida!</h1>
+    </div>
+
+    <div class="main-content">
+        <div class="timer" id="promotion-timer">
+            Promoção Especial: Apenas R$ 15,00! <br>
+            Tempo Restante: <span id="countdown">Carregando...</span>
+        </div>
+        <img src="Capturar%20(1).png" alt="Plano de Treinos e Dieta" class="product-image">
+        <h2>Plano Completo de Treinos e Dieta</h2>
+        <p class="product-description">
+            Apresentamos o nosso <span class="highlight">Plano Completo de Treinos e Dieta</span>, a solução perfeita
+            para alcançar seus objetivos de forma eficaz e sustentável. Este plano combina estratégias de treino de alta
+            performance com uma dieta balanceada, projetada para otimizar seus resultados e promover uma transformação
+            real.
+        </p>
+        <p>
+            Com nosso plano, você terá acesso a treinos detalhados e ajustados às suas necessidades, além de um plano
+            alimentar que maximiza a energia e recupera seu corpo da maneira certa. É mais do que apenas um programa – é
+            um caminho para uma nova versão de você mesmo, mais saudável e em forma.
+        </p>
+        <p>
+            Não perca a chance de mudar sua vida hoje mesmo. Invista em você e sinta a diferença!
+        </p>
+        <a href="https://pay.kiwify.com.br/QPLjLbL" class="cta-button">Adquira o Seu Plano Agora!</a>
+
+        <div class="footer">
+            <p>Para mais informações, entre em contato:</p>
+            <div class="whatsapp-icon" onclick="window.open('https://wa.me/51996664654', '_blank')"></div>
+        </div>
+    </div>
+
+    <script>
+        // Verifica se a data de término da promoção está armazenada no localStorage
+        let promotionEndDate = localStorage.getItem('promotionEndDate');
+
+        // Se não houver data armazenada, define a data de término para 8 dias a partir de agora e armazena
+        if (!promotionEndDate) {
+            promotionEndDate = new Date();
+            promotionEndDate.setDate(promotionEndDate.getDate() + 8); // Define o fim da promoção para 8 dias a partir de agora
+            localStorage.setItem('promotionEndDate', promotionEndDate.toISOString());
+        } else {
+            promotionEndDate = new Date(promotionEndDate);
+        }
+
+        // Função para atualizar a contagem regressiva
+        function updateCountdown() {
+            const now = new Date();
+            const timeRemaining = promotionEndDate - now;
+
+            if (timeRemaining <= 0) {
+                document.getElementById('countdown').textContent = "00d 00h 00m 00s";
+                return;
+            }
+
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').textContent =
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        // Atualiza o temporizador quando a página é carregada
+        window.onload = updateCountdown;
+    </script>
+</body>
+</html>
